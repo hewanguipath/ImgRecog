@@ -94,8 +94,8 @@ def load():
 #Process image recog
 def imageProcess(file_name):
   global graph, input_operation, output_operation, labels,ts
-  input_height = 128
-  input_width = 128
+  input_height = 96
+  input_width = 96
   input_mean = 0
   input_std = 255
 
@@ -123,4 +123,4 @@ def imageProcess(file_name):
 
 
 load()
-print(imageProcess("c:\\tmp\\test2.jpg"))
+print(imageProcess("c:\\tmp\\me.jpg"))
