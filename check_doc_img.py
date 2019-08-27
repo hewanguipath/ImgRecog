@@ -94,8 +94,8 @@ def load():
 #Process image recog
 def imageProcess(file_name):
   global graph, input_operation, output_operation, labels,ts
-  input_height = 224
-  input_width = 224
+  input_height = 299
+  input_width = 299
   input_mean = 0
   input_std = 255
 
@@ -116,7 +116,7 @@ def imageProcess(file_name):
   results = np.squeeze(results)
 
   top_k = results.argsort()[-5:][::-1]
-  if results[top_k[0]] > 0.3:
+  if results[top_k[0]] > 0.8:  #the confidence threshold to be considered as valid prediction
     return (labels[top_k[0]]+": "+str(round(float(results[top_k[0]])*100,2)) + "% \n" + labels[top_k[1]]+": "+str(round(float(results[top_k[1]])*100,2)) + "% \n" + labels[top_k[2]]+": "+str(round(float(results[top_k[2]])*100,2)) + "%")
   else:
     return ("To be verify: "+str(round(float(results[top_k[0]])*100,2)) + "%")
