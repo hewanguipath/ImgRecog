@@ -13,18 +13,22 @@
 # limitations under the License.
 # ==============================================================================
 # Wang He modified for uipath python invoke activity
-# optimized for better performance, load model only once
+# Optimized for better performance, load model only once
+# Add function for going through folders
 
 import numpy as np
 import tensorflow as tf
 # Just disables the warning, doesn't enable AVX/FMA
 import os
+import sys
 import time
+
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+fileCount = 0
 
 def load_graph(model_file):
   graph = tf.Graph()
-  graph_def = tf.GraphDef()
+  graph_def = tf.compat.v1.GraphDef()
 
   with open(model_file, "rb") as f:
     graph_def.ParseFromString(f.read())
@@ -41,7 +45,7 @@ def read_tensor_from_image_file(file_name,
                                 input_std=255):
   input_name = "file_reader"
   output_name = "normalized"
-  file_reader = tf.read_file(file_name, input_name)
+  file_reader = tf.io.read_file(file_name, input_name)
   if file_name.endswith(".png"):
     image_reader = tf.image.decode_png(
         file_reader, channels=3, name="png_reader")
@@ -55,9 +59,9 @@ def read_tensor_from_image_file(file_name,
         file_reader, channels=3, name="jpeg_reader")
   float_caster = tf.cast(image_reader, tf.float32)
   dims_expander = tf.expand_dims(float_caster, 0)
-  resized = tf.image.resize_bilinear(dims_expander, [input_height, input_width])
+  resized = tf.compat.v1.image.resize_bilinear(dims_expander, [input_height, input_width])
   normalized = tf.divide(tf.subtract(resized, [input_mean]), [input_std])
-  sess = tf.Session()
+  sess = tf.compat.v1.Session()
   result = sess.run(normalized)
 
   return result
@@ -65,7 +69,7 @@ def read_tensor_from_image_file(file_name,
 
 def load_labels(label_file):
   label = []
-  proto_as_ascii_lines = tf.gfile.GFile(label_file).readlines()
+  proto_as_ascii_lines = tf.io.gfile.GFile(label_file).readlines()
   for l in proto_as_ascii_lines:
     label.append(l.rstrip())
   return label
@@ -74,7 +78,7 @@ def load_labels(label_file):
 def load():
   global graph, input_operation, output_operation, labels, ts
   ts = time.time()
-  print ("Start: ", time.time()-ts)
+  #print ("Start: ", time.time()-ts)
 
   model_file = "/tmp/output_graph.pb"
   label_file = "/tmp/output_labels.txt"
@@ -89,15 +93,19 @@ def load():
   output_name = "import/" + output_layer
   input_operation = graph.get_operation_by_name(input_name)
   output_operation = graph.get_operation_by_name(output_name)
-  print ("load model: ", time.time()-ts)
+  print ("load model takes: ", str(round(time.time()-ts,3)) + "s")
+  ts = time.time()
 
 #Process image recog
 def imageProcess(file_name):
   global graph, input_operation, output_operation, labels,ts
+  PERFORMANCE_TESTING = 0
+
   input_height = 299
   input_width = 299
   input_mean = 0
   input_std = 255
+  print(os.path.basename(file_name), end="\t")
 
   t = read_tensor_from_image_file(
       file_name,
@@ -105,22 +113,54 @@ def imageProcess(file_name):
       input_width=input_width,
       input_mean=input_mean,
       input_std=input_std)
-  print ("load img: ", time.time()-ts)
+  if PERFORMANCE_TESTING:
+    print ("\t"+"load img: ", round(time.time()-ts, 3))
+    ts = time.time()
 
-  with tf.Session(graph=graph) as sess:
+  with tf.compat.v1.Session(graph=graph) as sess:
     results = sess.run(
       output_operation.outputs[0], {
       input_operation.outputs[0]: t
     })
-  print ("Classify: ", time.time()-ts)
+  if PERFORMANCE_TESTING:
+    print ("\t"+"Classify: ", round(time.time()-ts, 3))
+    ts = time.time()
   results = np.squeeze(results)
 
   top_k = results.argsort()[-5:][::-1]
   if results[top_k[0]] > 0.8:  #the confidence threshold to be considered as valid prediction
+    print ("is "+labels[top_k[0]]+": "+str(round(float(results[top_k[0]])*100,2)) + "% ")
     return (labels[top_k[0]]+": "+str(round(float(results[top_k[0]])*100,2)) + "% \n" + labels[top_k[1]]+": "+str(round(float(results[top_k[1]])*100,2)) + "% \n" + labels[top_k[2]]+": "+str(round(float(results[top_k[2]])*100,2)) + "%")
   else:
+    print ("is not sure " + str(round(float(results[top_k[0]])*100,2)) + "%")
     return ("To be verify: "+str(round(float(results[top_k[0]])*100,2)) + "%")
 
+# go through all the files in the folder
+def fileGothrough(inputPath, recursive = False):
+  global fileCount
+  if os.path.isfile(inputPath):
+    print(imageProcess(inputPath))
+  elif os.path.isdir(inputPath):
+    for imgfile in os.listdir(inputPath):
+      try:
+        if os.path.isfile(inputPath+"\\"+imgfile):
+          imageProcess(inputPath+"\\"+imgfile)
+          fileCount += 1
+        elif recursive:
+          fileGothrough(inputPath+"\\"+imgfile, True)
+      except:
+        print("is not a image file")
+  else:
+    print("File or Folder doesn't exist")
 
+
+#Test run
 load()
-print(imageProcess("c:\\tmp\\me.jpg"))
+if len(sys.argv) > 2 and sys.argv[2] == "-s":
+  fileGothrough(sys.argv[1], True)
+  print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
+elif len(sys.argv) > 1:
+  fileGothrough(sys.argv[1])
+  print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
+else:
+  print ("Please try python "+__file__+ " <File or Folder Path>")
