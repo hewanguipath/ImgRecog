@@ -1,4 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="testImgRec" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="562,1322.66666666667" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="testImgRec" this:testImgRec.file_name="C:\Users\He.Wang\Pictures\temp.png" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="file_name" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>580.666666666667,1560.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -50,13 +58,13 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Python</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Image rec&#xA;" DisplayName="testImgRec" sap:VirtualizedContainerService.HintSize="522,1202.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+  <Sequence sap2010:Annotation.AnnotationText="Image rec&#xA;" DisplayName="testImgRec" sap:VirtualizedContainerService.HintSize="540.666666666667,1440.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:UiElement" Name="UIE" />
       <Variable x:TypeArguments="ui:Image" Name="Img" />
-      <Variable x:TypeArguments="x:String" Default="C:\Users\He.Wang\Documents\UiPath\Demo\Untitled.png" Name="file_name" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -64,67 +72,87 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,1033.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_3" Path="C:\Users\He.Wang\.conda\envs\PY36_TF" TargetPlatform="x64" Version="Python_36">
-      <p:PythonScope.Body>
-        <ActivityAction x:TypeArguments="x:Object">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,997.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="p:PythonObject" Name="script" />
-              <Variable x:TypeArguments="p:PythonObject" Name="res" />
-              <Variable x:TypeArguments="x:Object" Name="restr" />
-            </Sequence.Variables>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <p:LoadScript Code="{x:Null}" DisplayName="Load Python Script" sap:VirtualizedContainerService.HintSize="464,52.6666666666667" sap2010:WorkflowViewState.IdRef="LoadScript_3" Result="[script]" ScriptFile="check_doc_img.py">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </p:LoadScript>
-            <p:InvokeMethod Parameters="{x:Null}" DisplayName="Python Load the Model" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_5" Instance="[script]" Name="load" Result="[res]" />
-            <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="464,718.666666666667" sap2010:WorkflowViewState.IdRef="DoWhile_2" Condition="True">
-              <Sequence sap:VirtualizedContainerService.HintSize="336,554" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="518.666666666667,1271.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,1033.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_4" Path="C:\Users\He.Wang\.conda\envs\cntk" TargetPlatform="x64" Version="Python_36">
+          <p:PythonScope.Body>
+            <ActivityAction x:TypeArguments="x:Object">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,997.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="p:PythonObject" Name="script" />
+                  <Variable x:TypeArguments="p:PythonObject" Name="res" />
+                  <Variable x:TypeArguments="x:Object" Name="restr" />
+                </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:IndicateOnScreen DisplayName="Indicate On Screen" HidePreview="False" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="IndicateOnScreen_3" SelectScreenRegion="False" SelectedUiElement="[UIE]" />
-                <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="TakeScreenshot_3" Screenshot="[Img]">
-                  <ui:TakeScreenshot.Target>
-                    <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[UIE]" WaitForReady="INTERACTIVE" />
-                  </ui:TakeScreenshot.Target>
+                <p:LoadScript Code="{x:Null}" DisplayName="Load Python Script" sap:VirtualizedContainerService.HintSize="464,52.6666666666667" sap2010:WorkflowViewState.IdRef="LoadScript_4" Result="[script]" ScriptFile="check_doc_img.py">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                </ui:TakeScreenshot>
-                <ui:SaveImage DisplayName="Save Image" FileName="[file_name]" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="SaveImage_3" Image="[Img]">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                </ui:SaveImage>
-                <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_6" Instance="[script]" Name="imageProcess" Parameters="[{ file_name }]" Result="[res]" />
-                <p:GetObject x:TypeArguments="x:Object" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="GetObject`1_3" PythonObject="[res]" Result="[restr]" />
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="314,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[file_name +Environment.NewLine + restr.ToString]" TopMost="True" />
+                </p:LoadScript>
+                <p:InvokeMethod Parameters="{x:Null}" DisplayName="Python Load the Model" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_7" Instance="[script]" Name="load" Result="[res]" />
+                <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="464,718.666666666667" sap2010:WorkflowViewState.IdRef="DoWhile_3" Condition="True">
+                  <Sequence sap:VirtualizedContainerService.HintSize="336,554" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:IndicateOnScreen DisplayName="Indicate On Screen" HidePreview="False" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="IndicateOnScreen_4" SelectScreenRegion="False" SelectedUiElement="[UIE]" />
+                    <ui:TakeScreenshot WaitBefore="{x:Null}" DisplayName="Take Screenshot" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="TakeScreenshot_4" Screenshot="[Img]">
+                      <ui:TakeScreenshot.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" Element="[UIE]" WaitForReady="INTERACTIVE" />
+                      </ui:TakeScreenshot.Target>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:TakeScreenshot>
+                    <ui:SaveImage DisplayName="Save Image" FileName="[file_name]" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="SaveImage_4" Image="[Img]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:SaveImage>
+                    <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_8" Instance="[script]" Name="imageProcess" Parameters="[{ file_name }]" Result="[res]" />
+                    <p:GetObject x:TypeArguments="x:Object" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="GetObject`1_4" PythonObject="[res]" Result="[restr]" />
+                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="314,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;The picture you select could be&quot; +Environment.NewLine + restr.ToString]" TopMost="True" />
+                  </Sequence>
+                </DoWhile>
               </Sequence>
-            </DoWhile>
-          </Sequence>
-        </ActivityAction>
-      </p:PythonScope.Body>
-    </p:PythonScope>
+            </ActivityAction>
+          </p:PythonScope.Body>
+        </p:PythonScope>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="504.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="314,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Warn" Message="[exception.Source+ &quot;: &quot; + exception.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
   </Sequence>
 </Activity>
