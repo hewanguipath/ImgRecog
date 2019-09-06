@@ -154,13 +154,15 @@ def fileGothrough(inputPath, recursive = False):
     print("File or Folder doesn't exist")
 
 
+if __name__ == "__main__":
 #Test run
-load()
-if len(sys.argv) > 2 and sys.argv[2] == "-s":
-  fileGothrough(sys.argv[1], True)
-  print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
-elif len(sys.argv) > 1:
-  fileGothrough(sys.argv[1])
-  print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
-else:
-  print ("Please try python "+__file__+ " <File or Folder Path>")
+  load() 
+  if len(sys.argv) > 2 and sys.argv[2] == "-s":
+    fileGothrough(sys.argv[1], True)
+    print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
+  elif len(sys.argv) > 1:
+    fileGothrough(sys.argv[1])
+    print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
+  else:
+    print ("Please try python "+__file__+ " <File or Folder Path>")
+
