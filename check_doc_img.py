@@ -153,16 +153,24 @@ def fileGothrough(inputPath, recursive = False):
   else:
     print("File or Folder doesn't exist")
 
-
-if __name__ == "__main__":
 #Test run
-  load() 
-  if len(sys.argv) > 2 and sys.argv[2] == "-s":
+if __name__ == "__main__": 
+  if len(sys.argv) == 3 and sys.argv[2] in ("-s","/s"):
+    load()
     fileGothrough(sys.argv[1], True)
     print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
-  elif len(sys.argv) > 1:
-    fileGothrough(sys.argv[1])
-    print(str(fileCount) + " image files, taks " + str(round(time.time()-ts,3)) + "s total")
+  elif len(sys.argv) == 2:
+    if sys.argv[1] in ("-h","/h","--h","--help"):
+      print ("\npython "+__file__+ " <File or Folder Path> [-s|/s]\n")
+      print ("    -h or /h\tfor help")
+      print ("    -s or /s\twill scan files in folder and subfolders\n")
+      print ("eg.\tpython "+__file__+ " c:\\tmp\\me.jpg\t for single picture")
+      print ("\tpython "+__file__+ " c:\\tmp\t\t for the files in folder")
+      print ("\tpython "+__file__+ " c:\\tmp -s\t for recursive")
+    else:
+      load()
+      fileGothrough(sys.argv[1])
+      print(str(fileCount) + " image files, takes " + str(round(time.time()-ts,3)) + "s total")
   else:
-    print ("Please try python "+__file__+ " <File or Folder Path>")
+    print ("Please try python "+__file__+ " -h for help")
 
