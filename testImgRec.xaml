@@ -1,6 +1,7 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="testImgRec" this:testImgRec.file_name="C:\Users\He.Wang\Pictures\temp.png" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="testImgRec" this:testImgRec.In_Python_Path="C:\Users\He.Wang\.conda\envs\cntk" this:testImgRec.In_TempFile_Path="C:\Users\He.Wang\Pictures\temp.png" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="file_name" Type="InArgument(x:String)" />
+    <x:Property Name="In_Python_Path" Type="InArgument(x:String)" />
+    <x:Property Name="In_TempFile_Path" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -74,7 +75,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="518.666666666667,1271.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,1033.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_4" Path="C:\Users\He.Wang\.conda\envs\cntk" TargetPlatform="x64" Version="Python_36">
+        <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,1033.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_4" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
           <p:PythonScope.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
@@ -119,7 +120,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:TakeScreenshot>
-                    <ui:SaveImage DisplayName="Save Image" FileName="[file_name]" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="SaveImage_4" Image="[Img]">
+                    <ui:SaveImage DisplayName="Save Image" FileName="[In_TempFile_Path]" sap:VirtualizedContainerService.HintSize="314,52.6666666666667" sap2010:WorkflowViewState.IdRef="SaveImage_4" Image="[Img]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -127,7 +128,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:SaveImage>
-                    <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_8" Instance="[script]" Name="imageProcess" Parameters="[{ file_name }]" Result="[res]" />
+                    <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_8" Instance="[script]" Name="imageProcess" Parameters="[{ In_TempFile_Path }]" Result="[res]" />
                     <p:GetObject x:TypeArguments="x:Object" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="GetObject`1_4" PythonObject="[res]" Result="[restr]" />
                     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="314,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;The picture you select could be&quot; +Environment.NewLine + restr.ToString]" TopMost="True" />
                   </Sequence>
