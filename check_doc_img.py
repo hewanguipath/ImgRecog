@@ -22,9 +22,16 @@ import tensorflow as tf
 import os
 import sys
 import time
+import cv2
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 fileCount = 0
+
+def variance_of_laplacian(imagePath):
+	# compute the Laplacian of the image and then return the focus
+	# measure, which is simply the variance of the Laplacian
+  image = cv2.imread(imagePath)
+  return cv2.Laplacian(image, cv2.CV_64F).var()
 
 def load_graph(model_file):
   graph = tf.Graph()
@@ -101,8 +108,8 @@ def imageProcess(file_name):
   global graph, input_operation, output_operation, labels,ts
   PERFORMANCE_TESTING = 0
 
-  input_height = 299
-  input_width = 299
+  input_height = 380
+  input_width = 380
   input_mean = 0
   input_std = 255
   print(os.path.basename(file_name), end="\t")
@@ -130,10 +137,10 @@ def imageProcess(file_name):
   top_k = results.argsort()[-5:][::-1]
   if results[top_k[0]] > 0.8:  #the confidence threshold to be considered as valid prediction
     print ("is "+labels[top_k[0]]+": "+str(round(float(results[top_k[0]])*100,2)) + "% ")
-    return (labels[top_k[0]]+": "+str(round(float(results[top_k[0]])*100,2)) + "% \n" + labels[top_k[1]]+": "+str(round(float(results[top_k[1]])*100,2)) + "% \n" + labels[top_k[2]]+": "+str(round(float(results[top_k[2]])*100,2)) + "%")
+    return ("{ \""+labels[top_k[0]]+"\": \""+str(round(float(results[top_k[0]])*100,2)) + "%\" }")
   else:
     print ("is not sure " + str(round(float(results[top_k[0]])*100,2)) + "%")
-    return ("To be verify: "+str(round(float(results[top_k[0]])*100,2)) + "%")
+    return ("{ \"ToBeVerify\": \""+str(round(float(results[top_k[0]])*100,2)) + "%\" }")
 
 # go through all the files in the folder
 def fileGothrough(inputPath, recursive = False):
