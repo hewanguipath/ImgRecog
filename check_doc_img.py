@@ -108,8 +108,8 @@ def imageProcess(file_name):
   global graph, input_operation, output_operation, labels,ts
   PERFORMANCE_TESTING = 0
 
-  input_height = 380
-  input_width = 380
+  input_height = 299
+  input_width = 299
   input_mean = 0
   input_std = 255
   print(os.path.basename(file_name), end="\t")
