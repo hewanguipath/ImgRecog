@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1001.33333333333,3483.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>859.333333333333,3055.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Imgregcon_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -71,7 +71,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="961.333333333333,3363.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_32">
+  <Sequence sap:VirtualizedContainerService.HintSize="819.333333333333,2975.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_32">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="table" />
     </Sequence.Variables>
@@ -80,13 +80,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="797.333333333333,2934.66666666667" sap2010:WorkflowViewState.IdRef="PythonScope_3" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
+    <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="797.333333333333,2851.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_3" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
       <p:PythonScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="783.333333333333,2898.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_31">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="783.333333333333,2815.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_31">
             <Sequence.Variables>
               <Variable x:TypeArguments="p:PythonObject" Name="script" />
               <Variable x:TypeArguments="p:PythonObject" Name="res" />
@@ -100,15 +100,15 @@
             <ui:BuildDataTable DataTable="[table]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="761.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FileName&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Blurry&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Confident&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
             <p:LoadScript Code="{x:Null}" DisplayName="Load Python Script" sap:VirtualizedContainerService.HintSize="761.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="LoadScript_5" Result="[script]" ScriptFile="check_doc_img.py" />
             <p:InvokeMethod Parameters="{x:Null}" DisplayName="Python Load the Model" sap:VirtualizedContainerService.HintSize="761.333333333333,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_5" Instance="[script]" Name="load" Result="[res]" />
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each image" sap:VirtualizedContainerService.HintSize="761.333333333333,2360.66666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[Directory.GetFiles(In_ImgFolder_Path, &quot;*.jpg&quot;, SearchOption.TopDirectoryOnly)]">
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each image" sap:VirtualizedContainerService.HintSize="761.333333333333,2277.33333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[Directory.EnumerateFiles(In_ImgFolder_Path).Where(Function(file) file.ToLower.EndsWith(&quot;.png&quot;) or file.ToLower.EndsWith(&quot;.jpg&quot;) or file.ToLower.EndsWith(&quot;.jpeg&quot;))]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="file_name" />
                   </ActivityAction.Argument>
-                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="744.666666666667,2225.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="744.666666666667,2142" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                     <TryCatch.Try>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="726,1987.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="726,1904" sap2010:WorkflowViewState.IdRef="Sequence_36">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:Int32" Name="resint" />
                           <Variable x:TypeArguments="sd:DataRow" Name="row" />
@@ -137,9 +137,9 @@
                         </Assign>
                         <p:InvokeMethod DisplayName="Python check img blurry" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" Instance="[script]" Name="variance_of_laplacian" Parameters="[{ file_name }]" Result="[res]" />
                         <p:GetObject x:TypeArguments="x:Int32" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="GetObject`1_8" PythonObject="[res]" Result="[resint]" />
-                        <If Condition="[resint &lt;= 100]" DisplayName="If var &lt; 100, means blurry" sap:VirtualizedContainerService.HintSize="704,739.333333333333" sap2010:WorkflowViewState.IdRef="If_9">
+                        <If Condition="[resint &lt;= 100]" DisplayName="If var &lt; 100, means blurry" sap:VirtualizedContainerService.HintSize="704,656" sap2010:WorkflowViewState.IdRef="If_9">
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="436,588.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                            <Sequence sap:VirtualizedContainerService.HintSize="436,505.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_37">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -153,7 +153,7 @@
                                   <InArgument x:TypeArguments="x:Object">["Blurry"]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="414,300.666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="414,217.333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -164,10 +164,10 @@
                                   <ui:CopyFile ContinueOnError="{x:Null}" Destination="[In_ImgFolder_Path+&quot;\Blurry\&quot;+Path.GetFileName(file_name)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="True" Path="[file_name]" />
                                 </TryCatch.Try>
                                 <TryCatch.Catches>
-                                  <Catch x:TypeArguments="si:FileNotFoundException" sap:VirtualizedContainerService.HintSize="400,105.333333333333" sap2010:WorkflowViewState.IdRef="Catch`1_6">
+                                  <Catch x:TypeArguments="si:FileNotFoundException" sap:VirtualizedContainerService.HintSize="400,22" sap2010:WorkflowViewState.IdRef="Catch`1_6">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>

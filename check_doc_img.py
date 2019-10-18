@@ -30,7 +30,7 @@ fileCount = 0
 def variance_of_laplacian(imagePath):
 	# compute the Laplacian of the image and then return the focus
 	# measure, which is simply the variance of the Laplacian
-  image = cv2.imread(imagePath, cv2.IMREAD_UNCHANGED)
+  image = cv2.imread(imagePath)
   return cv2.Laplacian(image, cv2.CV_64F).var()
 
 def load_graph(model_file):
