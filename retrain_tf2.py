@@ -109,25 +109,28 @@ def Retrain(data_dir, saved_model_path, epochs = 5, do_data_augmentation = False
     logdir = os.path.join(saved_model_path, datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
     
-    model.fit_generator(
+    hist = model.fit_generator(
         train_generator,
         epochs=epochs, steps_per_epoch=steps_per_epoch,
         callbacks = [tensorboard_callback],
         validation_data=valid_generator,
-        validation_steps=validation_steps)
+        validation_steps=validation_steps).history
+    
+    print(hist)
 
     """Finally, the trained model can be saved for deployment to TF Serving or TF Lite (on mobile) as follows."""
     tf.saved_model.save(model, saved_model_path)
 
     end = time.time()
     duration = end-start
-    return ("time consumed: " + str(datetime.timedelta(seconds=int(duration))) + "s")
+    print ("time consumed: " + str(datetime.timedelta(seconds=int(duration))) + "s")
+    return hist['val_accuracy'][-1]
     
 
 if __name__ == "__main__":
     print( Retrain(
     data_dir = 'C:\\Users\\He.Wang\\Pictures\\DataSet\\Luggage_old',
     saved_model_path = "C:\\tmp\\saved_models",
-    epochs = 100,
-    do_data_augmentation = True
+    epochs = 2,
+    do_data_augmentation = False
     ))
