@@ -1,13 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Imgregcon" this:Imgregcon.In_Label_tobe_pickup="BrokenLuggage" this:Imgregcon.In_ImgFolder_Path="C:\Users\He.Wang\Pictures" this:Imgregcon.In_Python_Path="C:\Users\He.Wang\.conda\envs\cntk" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Imgregcon" this:Imgregcon.In_ImgFolder_Path="C:\Users\He.Wang\Pictures\brokenluggage" this:Imgregcon.In_Python_Path="C:\Users\He.Wang\.conda\envs\PY36_TF2" this:Imgregcon.In_ModelFile_Path="C:\tmp\saved_models" this:Imgregcon.In_CopyFolder_Path="C:\tmp\classified" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:p="http://schemas.uipath.com/workflow/activities/python" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="In_Label_tobe_pickup" Type="InArgument(x:String)" />
     <x:Property Name="In_ImgFolder_Path" Type="InArgument(x:String)" />
     <x:Property Name="In_Python_Path" Type="InArgument(x:String)" />
+    <x:Property Name="In_ModelFile_Path" Type="InArgument(x:String)" />
+    <x:Property Name="In_CopyFolder_Path" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>859.333333333333,3055.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>859.333333333333,3658</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Imgregcon_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -71,22 +72,40 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="819.333333333333,2975.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_32">
+  <Sequence sap:VirtualizedContainerService.HintSize="819.333333333333,3578" sap2010:WorkflowViewState.IdRef="Sequence_32">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="table" />
+      <Variable x:TypeArguments="x:String" Name="label" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="797.333333333333,2851.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_3" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
+    <ui:BuildDataTable DataTable="[table]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="797.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;FileName&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Blurry&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:ReadTextFile Content="[label]" DisplayName="Read Text File" FileName="[In_ModelFile_Path+&quot;\label.txt&quot;]" sap:VirtualizedContainerService.HintSize="797.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="797.333333333333,276" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[label.Trim.Split(New String() {Environment.NewLine}, StringSplitOptions.None)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+          </ActivityAction.Argument>
+          <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="217.333333333333,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_12" MethodName="Add">
+            <InvokeMethod.TargetObject>
+              <InArgument x:TypeArguments="sd:DataColumnCollection">[table.Columns]</InArgument>
+            </InvokeMethod.TargetObject>
+            <InArgument x:TypeArguments="x:String">[item]</InArgument>
+          </InvokeMethod>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="797.333333333333,2940.66666666667" sap2010:WorkflowViewState.IdRef="PythonScope_3" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
       <p:PythonScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="783.333333333333,2815.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_31">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="783.333333333333,2904.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_31">
             <Sequence.Variables>
               <Variable x:TypeArguments="p:PythonObject" Name="script" />
               <Variable x:TypeArguments="p:PythonObject" Name="res" />
@@ -97,18 +116,16 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:BuildDataTable DataTable="[table]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="761.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;FileName&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Blurry&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Confident&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-            <p:LoadScript Code="{x:Null}" DisplayName="Load Python Script" sap:VirtualizedContainerService.HintSize="761.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="LoadScript_5" Result="[script]" ScriptFile="check_doc_img.py" />
-            <p:InvokeMethod Parameters="{x:Null}" DisplayName="Python Load the Model" sap:VirtualizedContainerService.HintSize="761.333333333333,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_5" Instance="[script]" Name="load" Result="[res]" />
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each image" sap:VirtualizedContainerService.HintSize="761.333333333333,2277.33333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[Directory.EnumerateFiles(In_ImgFolder_Path).Where(Function(file) file.ToLower.EndsWith(&quot;.png&quot;) or file.ToLower.EndsWith(&quot;.jpg&quot;) or file.ToLower.EndsWith(&quot;.jpeg&quot;))]">
+            <p:LoadScript Code="{x:Null}" DisplayName="Load Python Script" sap:VirtualizedContainerService.HintSize="761.333333333333,58.6666666666667" sap2010:WorkflowViewState.IdRef="LoadScript_5" Result="[script]" ScriptFile="Inference_tf2.py" />
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each image" sap:VirtualizedContainerService.HintSize="761.333333333333,2527.33333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[Directory.EnumerateFiles(In_ImgFolder_Path).Where(Function(file) file.ToLower.EndsWith(&quot;.png&quot;) or file.ToLower.EndsWith(&quot;.jpg&quot;) or file.ToLower.EndsWith(&quot;.jpeg&quot;))]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="file_name" />
                   </ActivityAction.Argument>
-                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="744.666666666667,2142" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                  <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="744.666666666667,2392" sap2010:WorkflowViewState.IdRef="TryCatch_3">
                     <TryCatch.Try>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="726,1904" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="726,2154" sap2010:WorkflowViewState.IdRef="Sequence_36">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:Int32" Name="resint" />
                           <Variable x:TypeArguments="sd:DataRow" Name="row" />
@@ -137,9 +154,9 @@
                         </Assign>
                         <p:InvokeMethod DisplayName="Python check img blurry" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" Instance="[script]" Name="variance_of_laplacian" Parameters="[{ file_name }]" Result="[res]" />
                         <p:GetObject x:TypeArguments="x:Int32" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="GetObject`1_8" PythonObject="[res]" Result="[resint]" />
-                        <If Condition="[resint &lt;= 100]" DisplayName="If var &lt; 100, means blurry" sap:VirtualizedContainerService.HintSize="704,656" sap2010:WorkflowViewState.IdRef="If_9">
+                        <If Condition="[resint &lt;= 100]" DisplayName="If var &lt; 100, means blurry" sap:VirtualizedContainerService.HintSize="704,739.333333333333" sap2010:WorkflowViewState.IdRef="If_9">
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="436,505.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                            <Sequence sap:VirtualizedContainerService.HintSize="436,588.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_37">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -153,7 +170,7 @@
                                   <InArgument x:TypeArguments="x:Object">["Blurry"]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="414,217.333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="414,300.666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -161,7 +178,7 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                                 <TryCatch.Try>
-                                  <ui:CopyFile ContinueOnError="{x:Null}" Destination="[In_ImgFolder_Path+&quot;\Blurry\&quot;+Path.GetFileName(file_name)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="True" Path="[file_name]" />
+                                  <ui:CopyFile ContinueOnError="{x:Null}" Destination="[In_CopyFolder_Path+&quot;\Blurry\&quot;+Path.GetFileName(file_name)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CopyFile_8" Overwrite="True" Path="[file_name]" />
                                 </TryCatch.Try>
                                 <TryCatch.Catches>
                                   <Catch x:TypeArguments="si:FileNotFoundException" sap:VirtualizedContainerService.HintSize="400,22" sap2010:WorkflowViewState.IdRef="Catch`1_6">
@@ -175,13 +192,13 @@
                                       <ActivityAction.Argument>
                                         <DelegateInArgument x:TypeArguments="si:FileNotFoundException" Name="exception" />
                                       </ActivityAction.Argument>
-                                      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_5" Path="[In_ImgFolder_Path+&quot;\Blurry&quot;]" />
+                                      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_5" Path="[In_CopyFolder_Path+&quot;\Blurry&quot;]" />
                                     </ActivityAction>
                                   </Catch>
-                                  <Catch x:TypeArguments="si:DirectoryNotFoundException" sap:VirtualizedContainerService.HintSize="400,22" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+                                  <Catch x:TypeArguments="si:DirectoryNotFoundException" sap:VirtualizedContainerService.HintSize="400,105.333333333333" sap2010:WorkflowViewState.IdRef="Catch`1_7">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
@@ -189,7 +206,7 @@
                                       <ActivityAction.Argument>
                                         <DelegateInArgument x:TypeArguments="si:DirectoryNotFoundException" Name="exception" />
                                       </ActivityAction.Argument>
-                                      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_6" Path="[In_ImgFolder_Path+&quot;\Blurry&quot;]" />
+                                      <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_6" Path="[In_CopyFolder_Path+&quot;\Blurry&quot;]" />
                                     </ActivityAction>
                                   </Catch>
                                 </TryCatch.Catches>
@@ -208,35 +225,27 @@
                             </Assign>
                           </If.Else>
                         </If>
-                        <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_10" Instance="[script]" Name="imageProcess" Parameters="[{ file_name }]" Result="[res]" />
+                        <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_10" Instance="[script]" Name="inference" Parameters="[{ file_name, In_ModelFile_Path }]" Result="[res]" />
                         <p:GetObject x:TypeArguments="x:String" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="704,22" sap2010:WorkflowViewState.IdRef="GetObject`1_9" PythonObject="[res]" Result="[restr]" />
                         <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="704,58.6666666666667" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[obj]" JsonString="[restr]" />
-                        <Assign sap:VirtualizedContainerService.HintSize="704,62" sap2010:WorkflowViewState.IdRef="Assign_12">
-                          <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[row("type")]</OutArgument>
-                          </Assign.To>
-                          <Assign.Value>
-                            <InArgument x:TypeArguments="x:Object">[obj.Properties(0).name]</InArgument>
-                          </Assign.Value>
-                        </Assign>
                         <Assign sap:VirtualizedContainerService.HintSize="704,62" sap2010:WorkflowViewState.IdRef="Assign_13">
                           <Assign.To>
-                            <OutArgument x:TypeArguments="x:Object">[row("confident")]</OutArgument>
+                            <OutArgument x:TypeArguments="x:Object">[row(obj.Properties(0).name)]</OutArgument>
                           </Assign.To>
                           <Assign.Value>
                             <InArgument x:TypeArguments="x:Object">[obj.Properties(0).Value.ToString]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="704,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="[file_name +&quot;: &quot;+ obj.ToString]" />
-                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="704,52.6666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                        <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="704,321.333333333333" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <TryCatch.Try>
-                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[In_ImgFolder_Path+&quot;\&quot;+row(&quot;type&quot;).ToString+&quot;\&quot;+Path.GetFileName(file_name)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CopyFile_7" Overwrite="True" Path="[file_name]" />
+                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[In_CopyFolder_Path + &quot;\&quot; + obj.Properties(0).name + &quot;\&quot; + Path.GetFileName(file_name)]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CopyFile_7" Overwrite="True" Path="[file_name]" />
                           </TryCatch.Try>
                           <TryCatch.Catches>
                             <Catch x:TypeArguments="si:FileNotFoundException" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_3">
@@ -250,7 +259,7 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="si:FileNotFoundException" Name="exception" />
                                 </ActivityAction.Argument>
-                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[In_ImgFolder_Path+&quot;\&quot;+row(&quot;type&quot;).ToString]" />
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[In_CopyFolder_Path + &quot;\&quot; + obj.Properties(0).name]" />
                               </ActivityAction>
                             </Catch>
                             <Catch x:TypeArguments="si:DirectoryNotFoundException" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_4">
@@ -264,7 +273,7 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="si:DirectoryNotFoundException" Name="exception" />
                                 </ActivityAction.Argument>
-                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[In_ImgFolder_Path+&quot;\&quot;+row(&quot;type&quot;).ToString]" />
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Directory" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[In_CopyFolder_Path + &quot;\&quot; + obj.Properties(0).name]" />
                               </ActivityAction>
                             </Catch>
                           </TryCatch.Catches>
@@ -297,7 +306,7 @@
                 </ActivityAction>
               </ui:ForEach.Body>
             </ui:ForEach>
-            <ui:WriteRange AddHeaders="True" DataTable="[table]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="761.333333333333,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="testResult.xlsx" />
+            <ui:WriteRange AddHeaders="True" DataTable="[table]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="761.333333333333,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[today.ToString(&quot;dd-MM-yyyy&quot;)]" StartingCell="A1" WorkbookPath="testResult.xlsx" />
           </Sequence>
         </ActivityAction>
       </p:PythonScope.Body>

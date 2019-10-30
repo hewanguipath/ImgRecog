@@ -62,10 +62,6 @@ def Retrain(data_dir, saved_model_path, epochs = 5, do_data_augmentation = False
     class_names = sorted(train_generator.class_indices.items(), key=lambda pair:pair[1])
     class_names = [key.title() for key, value in class_names]
     print ("Classes: ", class_names)
-    
-    with open(os.path.join(saved_model_path, 'label.txt'), 'w') as f:
-      for item in class_names:
-          f.write("%s\n" % item)
 
     """## Defining the model
     All it takes is to put a linear classifier on top of the `feature_extractor_layer` with the Hub module.
@@ -115,16 +111,19 @@ def Retrain(data_dir, saved_model_path, epochs = 5, do_data_augmentation = False
         callbacks = [tensorboard_callback],
         validation_data=valid_generator,
         validation_steps=validation_steps).history
-    
     print(hist)
 
     """Finally, the trained model can be saved for deployment to TF Serving or TF Lite (on mobile) as follows."""
     tf.saved_model.save(model, saved_model_path)
-
+    
+    with open(os.path.join(saved_model_path, 'label.txt'), 'w') as f:
+      for item in class_names:
+          f.write("%s\n" % item)
+          
     end = time.time()
     duration = end-start
     print ("time consumed: " + str(datetime.timedelta(seconds=int(duration))) + "s")
-    return hist['val_accuracy'][-1]
+    return str(hist['val_accuracy'][-1])
     
 
 if __name__ == "__main__":

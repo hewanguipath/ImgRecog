@@ -2,8 +2,15 @@
 import tensorflow as tf
 import numpy as np
 import os
+import cv2
 
-def Inference (file, model_path, labels_path=''):
+def variance_of_laplacian(imagePath):
+	# compute the Laplacian of the image and then return the focus
+	# measure, which is simply the variance of the Laplacian
+  image = cv2.imread(imagePath)
+  return cv2.Laplacian(image, cv2.CV_64F).var()
+
+def inference (file, model_path, labels_path=''):
     physical_devices = tf.config.experimental.list_physical_devices('GPU')
     if physical_devices:
         tf.config.experimental.set_memory_growth(physical_devices[0], True)
@@ -28,16 +35,15 @@ def Inference (file, model_path, labels_path=''):
     """The 1st Key of structured output is the output layer's name"""
     result = infer(tf.constant(x))[list(infer.structured_outputs.keys())[0]]
     confidence = np.amax(result[0], axis=-1)
-    print("labeling after saving and loading: ", np.asarray(result[0]))
 
     decoded = imagenet_labels[np.argmax(result[0], axis=-1)]
     #print("Result after saving and loading: ", decoded)
+    print("labeling after saving and loading: ", np.asarray(result[0]))
     
-    return (decoded + ": " + str(confidence))
-
+    return ("{ \""+decoded+"\": \""+ str(round(confidence*100)) + "%\" }")
 
 if __name__ == "__main__":
-    print( Inference(
+    print( inference(
         file = "C:\\Users\\He.Wang\\Pictures\\DataSet\\Luggage_old\\BrokenLuggage\\download (13).jpg",
         model_path = "C:\\tmp\\saved_models"
         ))
