@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 import os
 import cv2
+import json
 
 def variance_of_laplacian(imagePath):
 	# compute the Laplacian of the image and then return the focus
@@ -34,13 +35,19 @@ def inference (file, model_path, labels_path=''):
 
     """The 1st Key of structured output is the output layer's name"""
     result = infer(tf.constant(x))[list(infer.structured_outputs.keys())[0]]
-    confidence = np.amax(result[0], axis=-1)
+    TopConfidence = np.amax(result[0], axis=-1)
 
-    decoded = imagenet_labels[np.argmax(result[0], axis=-1)]
+    TopLabel = imagenet_labels[np.argmax(result[0], axis=-1)]
     #print("Result after saving and loading: ", decoded)
-    print("labeling after saving and loading: ", np.asarray(result[0]))
+    #print("labeling after saving and loading: ", np.asarray(result[0]))
     
-    return ("{ \""+decoded+"\": \""+ str(round(confidence*100)) + "%\" }")
+    TopXdictOfRes = dict(zip(imagenet_labels, np.asarray(result[0])))
+    print (TopXdictOfRes)
+    
+    return json.dumps({
+            k : str(round(v*100)) for k, v in TopXdictOfRes.items()
+            })
+    
 
 if __name__ == "__main__":
     print( inference(
