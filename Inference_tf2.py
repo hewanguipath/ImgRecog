@@ -47,6 +47,7 @@ def inference (file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_help = True
     parser.add_argument("image", help="image to be processed")
     parser.add_argument("--model_path", help="graph/model to be executed")
     parser.add_argument("--labels_path", help="name of file containing labels, defualt would be the model_path/label.txt")

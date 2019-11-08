@@ -129,6 +129,7 @@ class Wrapper(tf.train.Checkpoint):
       
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_help = True
     parser.add_argument("image_dir", help="folder of training images")
     parser.add_argument("--saved_model_dir", help="graph/model to be output")
     parser.add_argument("--output_labels", help="Label file to be output")
