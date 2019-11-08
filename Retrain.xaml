@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>476,2261.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>476,2726.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -61,7 +61,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Retrain" sap:VirtualizedContainerService.HintSize="436,2181.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence DisplayName="Retrain" sap:VirtualizedContainerService.HintSize="436,2646.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:TimeSpan" Name="duration" />
       <Variable x:TypeArguments="x:String" Name="restr" />
@@ -71,6 +71,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="414,94" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Recommed to call the python in commandline directly, which has more visiability than this workflow." />
     <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="414,649.333333333333" sap2010:WorkflowViewState.IdRef="PythonScope_2" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
       <p:PythonScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -126,13 +127,13 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </p:PythonScope>
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Write the record to excel, you can remove this one if you don't need it" sap:VirtualizedContainerService.HintSize="414,1368" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" Visible="False" WorkbookPath="testResult.xlsx">
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Write the record to excel, you can remove this one if you don't need it" sap:VirtualizedContainerService.HintSize="414,1699.33333333333" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" Visible="False" WorkbookPath="testResult.xlsx">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="336,1259.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="336,1590.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_10">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable" Name="RetrainTB" />
               <Variable x:TypeArguments="sd:DataRow" Name="row" />
@@ -165,30 +166,47 @@
                 <InArgument x:TypeArguments="x:Int32">[RetrainTB.Rows.Count+1]</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign sap:VirtualizedContainerService.HintSize="314,62" sap2010:WorkflowViewState.IdRef="Assign_7">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:Object">[row("BrokenLuggage")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:Int32">[Directory.EnumerateFiles(In_ImgFolder_Path+"\BrokenLuggage", "*.*", SearchOption.AllDirectories).Where(Function(file) file.ToLower.EndsWith(".png") or file.ToLower.EndsWith(".jpg") or file.ToLower.EndsWith(".jpeg")).Count]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign sap:VirtualizedContainerService.HintSize="314,62" sap2010:WorkflowViewState.IdRef="Assign_6">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:Object">[row("GoodLuggage")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:Int32">[Directory.EnumerateFiles(In_ImgFolder_Path+"\GoodLuggage", "*.*", SearchOption.AllDirectories).Where(Function(file) file.ToLower.EndsWith(".png") or file.ToLower.EndsWith(".jpg") or file.ToLower.EndsWith(".jpeg")).Count]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign sap:VirtualizedContainerService.HintSize="314,62" sap2010:WorkflowViewState.IdRef="Assign_8">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:Object">[row("NonLuggage")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:Int32">[Directory.EnumerateFiles(In_ImgFolder_Path+"\NonLuggage", "*.*", SearchOption.AllDirectories).Where(Function(file) file.ToLower.EndsWith(".png") or file.ToLower.EndsWith(".jpg") or file.ToLower.EndsWith(".jpeg")).Count]</InArgument>
-              </Assign.Value>
-            </Assign>
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="314,597.333333333333" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Directory.GetDirectories(In_ImgFolder_Path)]">
+              <ui:ForEach.Body>
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                  </ActivityAction.Argument>
+                  <Sequence sap:VirtualizedContainerService.HintSize="264,462" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="dirName" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="242,62" sap2010:WorkflowViewState.IdRef="Assign_14">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[dirName]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[item.Split("\"c).LastOrDefault]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="242,134" sap2010:WorkflowViewState.IdRef="InvokeMethod_7" MethodName="Add">
+                      <InvokeMethod.TargetObject>
+                        <InArgument x:TypeArguments="sd:DataColumnCollection">[RetrainTB.Columns]</InArgument>
+                      </InvokeMethod.TargetObject>
+                      <InArgument x:TypeArguments="x:String">[dirName]</InArgument>
+                    </InvokeMethod>
+                    <Assign sap:VirtualizedContainerService.HintSize="242,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row(dirName)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Int32">[Directory.EnumerateFiles(In_ImgFolder_Path+"\"+dirName, "*.*", SearchOption.AllDirectories).Where(Function(file) file.ToLower.EndsWith(".png") or file.ToLower.EndsWith(".jpg") or file.ToLower.EndsWith(".jpeg")).Count]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEach.Body>
+            </ui:ForEach>
             <Assign sap:VirtualizedContainerService.HintSize="314,62" sap2010:WorkflowViewState.IdRef="Assign_12">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:Object">[row("TrainingTime")]</OutArgument>

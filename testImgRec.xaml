@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>580.666666666667,1504.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>580.666666666667,1526.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -63,7 +63,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Image rec&#xA;" DisplayName="testImgRec" sap:VirtualizedContainerService.HintSize="540.666666666667,1384.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
+  <Sequence sap2010:Annotation.AnnotationText="Image rec&#xA;" DisplayName="testImgRec" sap:VirtualizedContainerService.HintSize="540.666666666667,1446.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_8">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:UiElement" Name="UIE" />
       <Variable x:TypeArguments="ui:Image" Name="Img" />
@@ -74,15 +74,15 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="518.666666666667,1215.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="518.666666666667,1277.33333333333" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,977.333333333333" sap2010:WorkflowViewState.IdRef="PythonScope_4" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
+        <p:PythonScope DisplayName="Python Scope" sap:VirtualizedContainerService.HintSize="500,1039.33333333333" sap2010:WorkflowViewState.IdRef="PythonScope_4" Path="[In_Python_Path]" TargetPlatform="x64" Version="Python_36">
           <p:PythonScope.Body>
             <ActivityAction x:TypeArguments="x:Object">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="x:Object" Name="PythonEngineSessionProperty" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,941.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,1003.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="p:PythonObject" Name="script" />
                   <Variable x:TypeArguments="p:PythonObject" Name="res" />
@@ -101,6 +101,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </p:LoadScript>
+                <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" Instance="[script]" Name="load" Parameters="[{ In_ModelFile_Path }]" Result="[res]" />
                 <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="464,718.666666666667" sap2010:WorkflowViewState.IdRef="DoWhile_3" Condition="True">
                   <Sequence sap:VirtualizedContainerService.HintSize="336,554" sap2010:WorkflowViewState.IdRef="Sequence_9">
                     <sap:WorkflowViewStateService.ViewState>
@@ -128,7 +129,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:SaveImage>
-                    <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_8" Instance="[script]" Name="inference" Parameters="[{ In_TempFile_Path, In_ModelFile_Path}]" Result="[res]" />
+                    <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_8" Instance="[script]" Name="inference" Parameters="[{ In_TempFile_Path}]" Result="[res]" />
                     <p:GetObject x:TypeArguments="x:Object" DisplayName="Get Python Object" sap:VirtualizedContainerService.HintSize="314,22" sap2010:WorkflowViewState.IdRef="GetObject`1_4" PythonObject="[res]" Result="[restr]" />
                     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="314,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;The picture you select could be&quot; +Environment.NewLine + restr.ToString]" TopMost="True" />
                   </Sequence>
