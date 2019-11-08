@@ -44,13 +44,6 @@ def inference (file):
     return json.dumps({
             k : str(round(v*100)) for k, v in TopXdictOfRes
             })
-    
-import cv2
-def variance_of_laplacian(imagePath):
-	# compute the Laplacian of the image and then return the focus
-	# measure, which is simply the variance of the Laplacian
-    image = cv2.imread(imagePath)
-    return cv2.Laplacian(image, cv2.CV_64F).var()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
