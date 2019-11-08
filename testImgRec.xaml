@@ -101,7 +101,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </p:LoadScript>
-                <p:InvokeMethod DisplayName="Python do image regcon" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" Instance="[script]" Name="load" Parameters="[{ In_ModelFile_Path }]" Result="[res]" />
+                <p:InvokeMethod DisplayName="Python Load model and label" sap:VirtualizedContainerService.HintSize="464,22" sap2010:WorkflowViewState.IdRef="InvokeMethod_9" Instance="[script]" Name="load" Parameters="[{ In_ModelFile_Path }]" Result="[res]" />
                 <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="464,718.666666666667" sap2010:WorkflowViewState.IdRef="DoWhile_3" Condition="True">
                   <Sequence sap:VirtualizedContainerService.HintSize="336,554" sap2010:WorkflowViewState.IdRef="Sequence_9">
                     <sap:WorkflowViewStateService.ViewState>

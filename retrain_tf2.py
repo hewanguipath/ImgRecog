@@ -159,7 +159,7 @@ if __name__ == "__main__":
     else:
       try:
         module_spec = hub.load_module_spec(args.tfhub_module)
-        image_size = hub.get_expected_image_size(module_spec)
+        image_size = tuple(hub.get_expected_image_size(module_spec))
         print ("get model spec", image_size)
       except:
         if "mobilenet" in args.tfhub_module:
